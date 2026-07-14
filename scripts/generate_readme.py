@@ -3,10 +3,15 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+import sys
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 # scripts/generate_readme.py의 상위 프로젝트 폴더
 ROOT = Path(__file__).resolve().parents[1]
@@ -149,7 +154,10 @@ def parse_metadata(java_file: Path) -> dict[str, str]:
 
 def get_first_commit(relative_path: str) -> GitInfo:
     """
-    파일을 최초로 추가한 커밋의 정보를 가져온다.
+    현재 경로의 파일이 가장 최근에 추가된 커밋 정보를 가져온다.
+
+    파일이 삭제 후 다시 추가된 경우에는 과거의 최초 추가 커밋이 아니라
+    현재 파일을 다시 추가한 최신 커밋을 사용한다.
 
     - 커밋 SHA
     - 날짜
@@ -158,21 +166,15 @@ def get_first_commit(relative_path: str) -> GitInfo:
     """
     output = run_git(
         "log",
-        "--follow",
+        "-1",
         "--diff-filter=A",
         "--date=short",
-        "--format=%H%x1f%ad%x1f%s%x1f%b%x1e",
+        "--format=%H%x1f%ad%x1f%s%x1f%b",
         "--",
         relative_path,
     )
 
-    records = [
-        record.strip()
-        for record in output.split("\x1e")
-        if record.strip()
-    ]
-
-    if not records:
+    if not output:
         return GitInfo(
             sha="",
             date="미커밋",
@@ -180,10 +182,7 @@ def get_first_commit(relative_path: str) -> GitInfo:
             body="",
         )
 
-    # git log는 최신 기록부터 출력한다.
-    # 파일이 삭제 후 재등록된 경우 가장 오래된 추가 커밋을 사용한다.
-    parts = records[-1].split("\x1f", 3)
-
+    parts = output.split("\x1f", 3)
     parts += [""] * (4 - len(parts))
 
     return GitInfo(
