@@ -1,3 +1,9 @@
+/*
+ * title: 문자 찾기
+ * tier: 입문
+ * url:
+ */
+
 package inflearn.string.p01;
 
 import java.util.*;

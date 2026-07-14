@@ -1,3 +1,9 @@
+/*
+ * title: 대소문자 변환
+ * tier: 입문
+ * url:
+ */
+
 package inflearn.string.p02;
 
 import java.util.Scanner;

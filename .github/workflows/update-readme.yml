@@ -1,0 +1,52 @@
+name: Update Algorithm README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**/*.java"
+      - "scripts/generate_readme.py"
+      - ".github/workflows/update-readme.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-algorithm-readme
+  cancel-in-progress: true
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Generate README
+        run: python scripts/generate_readme.py
+
+      - name: Commit README changes
+        run: |
+          if git diff --quiet README.md; then
+            echo "README.md 변경 사항이 없습니다."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add README.md
+          git commit -m "docs: update algorithm README"
+          git push origin main
