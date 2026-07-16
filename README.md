@@ -28,7 +28,7 @@ src/programmers/stackqueue/p42586/Main.java
 
 <!-- AUTO-GENERATED:START -->
 
-총 **12문제**
+총 **14문제**
 
 <details>
 <summary><strong>문자열 — 12문제</strong></summary>
@@ -47,6 +47,16 @@ src/programmers/stackqueue/p42586/Main.java
 | 문자열 | 입문 | 가장 짧은 문자거리 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/string/p10/Main.java) | 문자열을 왼쪽에서 오른쪽으로 순회하며 각 문자와 왼쪽에 있는 대상 문자 사이의 거리를 저장했다.<br>오른쪽에서 왼쪽으로 다시 순회해 오른쪽 대상 문자와의 거리를 계산하고, 기존 값과 비교해 더 짧은 거리를 유지했다. |
 | 문자열 | 입문 | 문자열 압축 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/string/p11/Main.java) | 문자열의 인접한 문자를 비교하며 같은 문자가 연속으로 등장한 횟수를 계산했다.<br>문자가 달라지는 시점에 문자와 반복 횟수를 StringBuilder에 추가하고, 한 번만 등장한 문자는 횟수를 생략했다. |
 | 문자열 | 입문 | 암호 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/string/p12/Main.java) | 암호 문자열을 문자 하나당 일곱 자리씩 분리하고 #은 1, *은 0으로 변환했다.<br>변환한 이진 문자열을 Integer.parseInt(..., 2)로 십진수화한 뒤 해당 유니코드 문자로 변환해 결과를<br>완성했다. |
+
+</details>
+
+<details>
+<summary><strong>배열 — 2문제</strong></summary>
+
+| 유형 | 티어 | 문제 | 출처 | 풀이 | Comment |
+| :---: | :---: | :--- | :---: | :---: | :---: |
+| 배열 | 입문 | 큰 수 출력하기 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p01/Main.java) | 첫 번째 수는 항상 결과에 포함하고, 두 번째 수부터 바로 앞의 수와 비교했다.<br>현재 수가 이전 수보다 큰 경우에만 ArrayList에 추가해 조건을 만족하는 수를 출력했다. |
+| 배열 | 입문 | 보이는 학생 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p02/Main.java) | 첫 번째 학생의 키를 초기 최댓값으로 설정하고 보이는 학생 수를 1로 초기화했다.<br>배열을 순회하며 현재까지의 최댓값보다 키가 큰 학생을 발견할 때마다 최댓값과 학생 수를 갱신했다. |
 
 </details>
 
