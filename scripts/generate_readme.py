@@ -19,9 +19,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = ROOT / "src"
 README_PATH = ROOT / "README.md"
 
+SOURCE_START_MARKER = "<!-- AUTO-SOURCES:START -->"
+SOURCE_END_MARKER = "<!-- AUTO-SOURCES:END -->"
+
 START_MARKER = "<!-- AUTO-GENERATED:START -->"
 END_MARKER = "<!-- AUTO-GENERATED:END -->"
-
 
 # src 바로 아래 폴더 이름과 README 표시 이름
 SOURCE_NAMES = {
@@ -65,7 +67,7 @@ CATEGORY_ORDER = list(CATEGORY_NAMES)
 
 # Main.java 상단의 메타데이터를 읽는 정규식
 METADATA_PATTERN = re.compile(
-    r"^\s*\*?\s*(title|tier|url)\s*:\s*(.*?)\s*$",
+    r"^[ \t]*\*?[ \t]*(title|tier|url)[ \t]*:[ \t]*(.*?)[ \t]*$",
     re.MULTILINE | re.IGNORECASE,
 )
 
@@ -334,6 +336,33 @@ def discover_problems() -> list[Problem]:
 
     return problems
 
+def generate_source_section(
+    problems: Iterable[Problem],
+) -> str:
+    """
+    실제로 등록된 문제의 출처만 목록으로 생성한다.
+    """
+    source_keys = sorted(
+        {
+            problem.source_key
+            for problem in problems
+        },
+        key=lambda source_key: (
+            SOURCE_ORDER.get(
+                source_key,
+                len(SOURCE_ORDER),
+            ),
+            source_key,
+        ),
+    )
+
+    if not source_keys:
+        return "- 아직 등록된 출처가 없습니다."
+
+    return "\n".join(
+        f"- {SOURCE_NAMES.get(source_key, source_key)}"
+        for source_key in source_keys
+    )
 
 def problem_link(problem: Problem) -> str:
     """
@@ -377,8 +406,8 @@ def generate_section(
     ]
 
     lines = [
-        f"총 **{len(problems)}문제**",
-        "",
+    f"총 **{len(problems)}문제**",
+    "",
     ]
 
     for category_key in category_keys:
@@ -474,10 +503,52 @@ def generate_section(
 
     return "\n".join(lines).rstrip()
 
-
-def update_readme(generated: str) -> None:
+def replace_marker_section(
+    text: str,
+    start_marker: str,
+    end_marker: str,
+    generated: str,
+    ) -> str:
     """
-    README의 두 마커 사이만 교체한다.
+    지정한 두 마커 사이의 내용만 교체한다.
+    """
+    if (
+        start_marker not in text
+        or end_marker not in text
+    ):
+        raise ValueError(
+            "README.md에 자동 생성 마커가 없습니다.\n"
+            f"{start_marker}\n"
+            f"{end_marker}"
+        )
+
+    before, remainder = text.split(
+        start_marker,
+        1,
+    )
+
+    _, after = remainder.split(
+        end_marker,
+        1,
+    )
+
+    return (
+        before.rstrip()
+        + "\n\n"
+        + start_marker
+        + "\n\n"
+        + generated.rstrip()
+        + "\n\n"
+        + end_marker
+        + after
+    )
+
+def update_readme(
+    source_generated: str,
+    problem_generated: str,
+    ) -> None:
+    """
+    README의 기존 문제 출처 목록과 문제 풀이 목록을 각각 갱신한다.
     """
     if not README_PATH.exists():
         raise FileNotFoundError(
@@ -488,35 +559,18 @@ def update_readme(generated: str) -> None:
         encoding="utf-8"
     )
 
-    if (
-        START_MARKER not in readme
-        or END_MARKER not in readme
-    ):
-        raise ValueError(
-            "README.md에 자동 생성 마커가 없습니다.\n"
-            f"{START_MARKER}\n"
-            f"{END_MARKER}"
-        )
+    updated = replace_marker_section(
+        readme,
+        SOURCE_START_MARKER,
+        SOURCE_END_MARKER,
+        source_generated,
+    )
 
-    before, remainder = readme.split(
+    updated = replace_marker_section(
+        updated,
         START_MARKER,
-        1,
-    )
-
-    _, after = remainder.split(
         END_MARKER,
-        1,
-    )
-
-    updated = (
-        before.rstrip()
-        + "\n\n"
-        + START_MARKER
-        + "\n\n"
-        + generated
-        + "\n\n"
-        + END_MARKER
-        + after
+        problem_generated,
     )
 
     README_PATH.write_text(
@@ -529,11 +583,18 @@ def update_readme(generated: str) -> None:
 def main() -> None:
     problems = discover_problems()
 
-    generated = generate_section(
+    source_generated = generate_source_section(
         problems
     )
 
-    update_readme(generated)
+    problem_generated = generate_section(
+        problems
+    )
+
+    update_readme(
+        source_generated,
+        problem_generated,
+    )
 
     print(
         "README.md 갱신 완료: "
