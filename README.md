@@ -28,7 +28,7 @@ src/programmers/stackqueue/p42586/Main.java
 
 <!-- AUTO-GENERATED:START -->
 
-총 **14문제**
+총 **16문제**
 
 <details>
 <summary><strong>문자열 — 12문제</strong></summary>
@@ -51,12 +51,14 @@ src/programmers/stackqueue/p42586/Main.java
 </details>
 
 <details>
-<summary><strong>배열 — 2문제</strong></summary>
+<summary><strong>배열 — 4문제</strong></summary>
 
 | 유형 | 티어 | 문제 | 출처 | 풀이 | Comment |
 | :---: | :---: | :--- | :---: | :---: | :---: |
 | 배열 | 입문 | 큰 수 출력하기 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p01/Main.java) | 첫 번째 수는 항상 결과에 포함하고, 두 번째 수부터 바로 앞의 수와 비교했다.<br>현재 수가 이전 수보다 큰 경우에만 ArrayList에 추가해 조건을 만족하는 수를 출력했다. |
 | 배열 | 입문 | 보이는 학생 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p02/Main.java) | 첫 번째 학생의 키를 초기 최댓값으로 설정하고 보이는 학생 수를 1로 초기화했다.<br>배열을 순회하며 현재까지의 최댓값보다 키가 큰 학생을 발견할 때마다 최댓값과 학생 수를 갱신했다. |
+| 배열 | 입문 | 가위바위보 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p03/Main.java) | A와 B가 낸 값을 같은 인덱스끼리 비교해 각 회차의 승패를 판별했다.<br>두 값이 같으면 D를 출력하고, A가 이기는 세 가지 조합을 조건식으로 처리해 나머지는 B의 승리로 구분했다. |
+| 배열 | 입문 | 피보나치 수열 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p04/Main.java) | 첫 번째와 두 번째 항을 1로 초기화하고, 이전 두 항의 합을 이용해 이후 항을 순차적으로 계산했다.<br>계산한 수열을 정수 배열에 저장해 반환하고, 반환된 배열을 순회하며 공백으로 구분해 출력했다. |
 
 </details>
 
