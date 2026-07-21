@@ -28,7 +28,7 @@ src/programmers/stackqueue/p42586/Main.java
 
 <!-- AUTO-GENERATED:START -->
 
-총 **16문제**
+총 **18문제**
 
 <details>
 <summary><strong>문자열 — 12문제</strong></summary>
@@ -51,7 +51,7 @@ src/programmers/stackqueue/p42586/Main.java
 </details>
 
 <details>
-<summary><strong>배열 — 4문제</strong></summary>
+<summary><strong>배열 — 6문제</strong></summary>
 
 | 유형 | 티어 | 문제 | 출처 | 풀이 | Comment |
 | :---: | :---: | :--- | :---: | :---: | :---: |
@@ -59,6 +59,8 @@ src/programmers/stackqueue/p42586/Main.java
 | 배열 | 입문 | 보이는 학생 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p02/Main.java) | 첫 번째 학생의 키를 초기 최댓값으로 설정하고 보이는 학생 수를 1로 초기화했다.<br>배열을 순회하며 현재까지의 최댓값보다 키가 큰 학생을 발견할 때마다 최댓값과 학생 수를 갱신했다. |
 | 배열 | 입문 | 가위바위보 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p03/Main.java) | A와 B가 낸 값을 같은 인덱스끼리 비교해 각 회차의 승패를 판별했다.<br>두 값이 같으면 D를 출력하고, A가 이기는 세 가지 조합을 조건식으로 처리해 나머지는 B의 승리로 구분했다. |
 | 배열 | 입문 | 피보나치 수열 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p04/Main.java) | 첫 번째와 두 번째 항을 1로 초기화하고, 이전 두 항의 합을 이용해 이후 항을 순차적으로 계산했다.<br>계산한 수열을 정수 배열에 저장해 반환하고, 반환된 배열을 순회하며 공백으로 구분해 출력했다. |
+| 배열 | 입문 | 소수(에라토스테네스 체) | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p05/Main.java) | 에라토스테네스의 체를 이용해 아직 합성수로 표시되지 않은 수를 소수로 판별했다.<br>소수를 발견할 때마다 개수를 증가시키고, 해당 수의 배수를 배열에 표시해 이후 검사에서 제외했다. |
+| 배열 | 입문 | 뒤집은 소수 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p06/Main.java) | 각 자연수의 마지막 자릿수를 반복적으로 추출해 숫자를 역순으로 뒤집었다.<br>뒤집은 수를 제곱근 범위까지 나누어 소수 여부를 판별하고, 소수인 값만 입력 순서대로 결과에 추가했다. |
 
 </details>
 
