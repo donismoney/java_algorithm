@@ -28,7 +28,7 @@ src/programmers/stackqueue/p42586/Main.java
 
 <!-- AUTO-GENERATED:START -->
 
-총 **20문제**
+총 **22문제**
 
 <details>
 <summary><strong>문자열 — 12문제</strong></summary>
@@ -51,7 +51,7 @@ src/programmers/stackqueue/p42586/Main.java
 </details>
 
 <details>
-<summary><strong>배열 — 8문제</strong></summary>
+<summary><strong>배열 — 10문제</strong></summary>
 
 | 유형 | 티어 | 문제 | 출처 | 풀이 | Comment |
 | :---: | :---: | :--- | :---: | :---: | :---: |
@@ -63,6 +63,8 @@ src/programmers/stackqueue/p42586/Main.java
 | 배열 | 입문 | 뒤집은 소수 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p06/Main.java) | 각 자연수의 마지막 자릿수를 반복적으로 추출해 숫자를 역순으로 뒤집었다.<br>뒤집은 수를 제곱근 범위까지 나누어 소수 여부를 판별하고, 소수인 값만 입력 순서대로 결과에 추가했다. |
 | 배열 | 입문 | 점수 계산 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p07/Main.java) | 정답이 연속될 때마다 가산점을 1씩 증가시켜 해당 문제의 점수에 반영했다.<br>오답이 나오면 가산점을 1로 초기화하고, 각 문제에서 획득한 점수를 누적해 총점을 계산했다. |
 | 배열 | 입문 | 등수 구하기 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p08/Main.java) | 원본 점수 배열을 복사해 오름차순으로 정렬하고, 높은 점수부터 순회하며 점수별 등수를 HashMap에 저장했다.<br>같은 점수는 putIfAbsent로 가장 높은 등수를 유지하고, 원본 배열 순서대로 등수를 조회해 결과를 구성했다. |
+| 배열 | 입문 | 격자판 최대 합 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p09/Main.java) | 각 행과 열을 순회하며 합을 계산하고, Math.max를 이용해 현재 최대합을 갱신했다.<br>주대각선과 반대 대각선의 합을 함께 누적한 뒤 행·열의 최대합과 비교해 최종 결과를 구했다. |
+| 배열 | 입문 | 봉우리 | 인프런 | [풀이](https://github.com/donismoney/java_algorithm/blob/main/src/inflearn/array/p10/Main.java) | 격자판 외곽을 0으로 패딩하고 방향 배열을 이용해 각 지점의 상하좌우 값을 검사했다.<br>주변 값 중 현재 값보다 크거나 같은 값이 있으면 라벨 continue로 다음 지점으로 이동하고, 네 방향보다 모두 큰 지점만<br>봉우리로 집계했다. |
 
 </details>
 
